@@ -9,7 +9,8 @@ var btnMute = document.getElementById("mute");
 var listAudioEvents = document.getElementById("audioEvents");
 
 // variables
-var roomNumber = 'webrtc-audio-demo';
+// var roomNumber = 'webrtc-audio-demo';
+var roomNumber = prompt("Enter the Room ID:");
 var localStream;
 var remoteStream;
 var rtcPeerConnection;
