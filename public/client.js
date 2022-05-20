@@ -2,7 +2,7 @@
 var divSelectRoom = document.getElementById("selectRoom");
 var divConferenceRoom = document.getElementById("conferenceRoom");
 var btnGoBoth = document.getElementById("goBoth");
-var btnGoVideoOnly = document.getElementById("goVideoOnly");
+var btnGoAudioOnly = document.getElementById("goAudioOnly");
 var localVideo = document.getElementById("localVideo");
 var remoteVideo = document.getElementById("remoteVideo");
 var btnMute = document.getElementById("mute");
@@ -29,13 +29,13 @@ var isCaller;
 var socket = io();
 
 btnGoBoth.onclick = () => initiateCall(true);
-btnGoVideoOnly.onclick = () => initiateCall(false);
+btnGoAudioOnly.onclick = () => initiateCall(false);
 btnMute.onclick = toggleAudio;
 
-function initiateCall(audio) {
+function initiateCall(video) {
     streamConstraints = {
-        video: true,
-        audio: audio
+        video: video,
+        audio: true
     }
     socket.emit('create or join', roomNumber);
     divSelectRoom.style = "display: none;";
