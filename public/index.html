@@ -47,10 +47,28 @@
             background: rgb(26, 155, 26);
             margin: auto;
         } */
+
+        .videoMuteStatus {
+            background-color: green;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 2px;
+            bottom: 6px;
+        }
+
+        #chatDiv {
+            background-color: #242424;
+            width: max-content;
+            min-width: 25%;
+            max-width: 35%;
+            min-height: 90%;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>WebRTC Audio Demo</h1>
+    <h1 id="MainTitle">WebRTC Audio Demo</h1>
 
     <div id="selectRoom">
         <button id="goBoth">Video and Audio</button>
@@ -59,10 +77,22 @@
     </div>
 
     <div id="conferenceRoom" style="display:none">
-        <video id="localVideo" autoplay muted></video>
-        <video id="remoteVideo" autoplay></video>
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+            <div style="display: inline-block;">
+                <div style="width: fit-content; position: relative; margin: 20px;">
+                    <video id="localVideo" autoplay muted></video>
+                    <div class="videoMuteStatus"></div>
+                </div>
+                <video id="remoteVideo" autoplay></video>
+            </div>
+
+            <div id="chatDiv">
+
+            </div>
+        </div>
+
         <br/>
-        <button id="mute" style="display: none; margin: auto; width: 100px; background-color: lime;">Toggle Mic</button>
+        <button id="mute" style="display: none; margin: auto; width: 100px; background-color: lime;">Mute</button>
         <h2>Remote audio events</h2>
         <div style="overflow-y: scroll; width: 90%;" id="audioEvents"></div>
     </div>

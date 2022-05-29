@@ -41,6 +41,7 @@ function initiateCall(video) {
     socket.emit('create or join', roomNumber);
     divSelectRoom.style = "display: none;";
     divConferenceRoom.style = "display: block;";
+    document.getElementById("MainTitle").style.display = "none";
 }
 
 // message handlers
@@ -166,6 +167,8 @@ function toggleAudio() {
         room: roomNumber,
         message: localStream.getAudioTracks()[0].enabled ? "Remote user's audio is unmuted" : "Remote user's audio is muted"
     });
+    btnMute.innerText = localStream.getAudioTracks()[0].enabled ? "Mute" : "Unmute";
+    // (TODO): Make the green box on the video element change its color depending on the mute/unmute status of the respective speaker.
 }
 
 function addAudioEvent(event) {
@@ -173,3 +176,6 @@ function addAudioEvent(event) {
     p.appendChild(document.createTextNode(event));
     listAudioEvents.appendChild(p);
 }
+
+// (TODO): Implement chatting based on the socket.io rooms.
+// (TODO): Implement screen-sharing.
