@@ -62,6 +62,6 @@ io.on('connection', function (socket) {
 });
 
 // listener
-httpsServer.listen(3000, function () {
-    console.log('listening on *:3000');
+httpsServer.listen(443, function () {
+    console.log('listening on *:443');
 });
