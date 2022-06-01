@@ -29,8 +29,8 @@ var isCaller;
 // Let's do this
 var socket = io();
 
-btnGoBoth.onclick = () => initiateCall(true);
-btnGoAudioOnly.onclick = () => initiateCall(false);
+// btnGoBoth.onclick = () => initiateCall(true);
+// btnGoAudioOnly.onclick = () => initiateCall(false);
 btnMute.onclick = toggleAudio;
 
 function initiateCall(video) {
@@ -171,6 +171,18 @@ function toggleAudio() {
     // (TODO): Make the green box on the video element change its color depending on the mute/unmute status of the respective speaker.
 }
 
+function toggleVideo(e) {
+    localStream.getVideoTracks()[0].enabled = !localStream.getVideoTracks()[0].enabled
+    socket.emit('toggleVideo', {
+        type: 'toggleVideo',
+        room: roomNumber,
+        message: localStream.getVideoTracks()[0].enabled ? "Remote user's video is on" : "Remote user's video is off"
+    });
+    e.target.innerText = localStream.getVideoTracks()[0].enabled ? "Turn Off Video" : "Turn On Video";
+    // (TODO): Make the green box on the video element change its color depending on the mute/unmute status of the respective speaker.
+}
+document.getElementById("turnOffVideo").onclick = toggleVideo;
+
 function addAudioEvent(event) {
     var p = document.createElement("p");
     p.appendChild(document.createTextNode(event));
@@ -263,5 +275,8 @@ function appendMessage(name, messageHTML, nameColor) {
         scrollTop: messageLog.scrollHeight - messageLog.clientHeight
     }, 100);
 }
+
+// (DONE): Allow users to turn off their webcam.
+initiateCall(true);
 
 // (TODO): Implement screen-sharing.
