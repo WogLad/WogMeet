@@ -59,6 +59,11 @@ io.on('connection', function (socket) {
         socket.broadcast.to(event.room).emit('toggleAudio', event.message);
     });
 
+    socket.on('send-chat-message', (messageData) => {
+        socket.broadcast.to(Object.values(socket.rooms)[1]).emit('chat-message', messageData);
+        // console.log(Object.values(socket.rooms)[1]);
+    });
+
 });
 
 // listener

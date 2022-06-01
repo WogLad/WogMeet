@@ -177,5 +177,91 @@ function addAudioEvent(event) {
     listAudioEvents.appendChild(p);
 }
 
-// (TODO): Implement chatting based on the socket.io rooms.
+function getRandomValueFromList(list) {
+    return (Object.values(list)[Math.floor(Math.random() * Object.values(list).length)]);
+}
+
+const chatColors = {
+    "Blue": "#0000ff",
+    "Coral": "#FF7F50",
+    "DodgerBlue": "#1E90FF",
+    "SpringGreen": "#26D07C",
+    "YellowGreen": "#D6E865",
+    "Green": "#00FF00",
+    "OrangeRed": "#FC4C02",
+    "Red": "#FF0000",
+    "GoldenRod": "#FFB81C",
+    "HotPink": "#E31C79",
+    "CadetBlue": "#5F9EA0",
+    "SeaGreen": "#2E8B57",
+    "Chocolate": "#84563C",
+    "BlueViolet": "#9933CC",
+    "FireBrick": "#993333"
+}
+
+//#region PARSING THE USERNAME PROVIDED BY THE USER
+var username = "";
+var localChatColor = "";
+if (window.localStorage.getItem("username") == null) {
+    username = prompt('What is your name?');
+    if (username != undefined && username.toLowerCase() != "server" && username.length >= 2) {
+        username = username.split(" ")[0];
+        if (username.length > 16) {
+            username = username.slice(0, 16);
+        }
+        window.localStorage.setItem("username", username);
+    }
+}
+if (window.localStorage.getItem("username") != null) {
+    username = window.localStorage.getItem("username");
+    // appendMessage("Server", '<b>You joined</b>', getRandomValueFromList(chatColors));
+    localChatColor = getRandomValueFromList(chatColors);
+    // socket.emit('new-user', {"name": username, "color": userColor});
+}
+//#endregion
+
+// (DONE): Implement chatting, based on the socket.io rooms.
+var mainInput = document.getElementById("main-input");
+var messageLog = document.getElementById("message-log");
+
+mainInput.addEventListener('keydown', e => {
+    console.log(123);
+    if (e.code == "Enter") {
+        sendButton();
+    }
+});
+
+function sendButton() {
+    console.log("message sent.");
+
+    // (DONE)
+    if (mainInput.innerHTML != "" && mainInput.innerText.length <= 280) {
+        appendMessage(username, mainInput.innerHTML, localChatColor);
+        socket.emit('send-chat-message', {username: username, message: mainInput.innerHTML, color: localChatColor});
+    }
+    setTimeout(()=>{
+        mainInput.innerHTML = "";
+    }, 0);
+}
+
+socket.on('chat-message', data => {
+    appendMessage(data.username, data.message, data.color);
+});
+
+// (DONE)
+function appendMessage(name, messageHTML, nameColor) {
+    var el = document.createElement("div");
+    el.innerHTML = ("<span style='font-size: 10px; vertical-align: center;'>" + (new Date().toLocaleTimeString()) + "</span>")
+    el.innerHTML += (` <span style='color: ${nameColor};'><b>${name}</b></span>: `);
+    // el.innerHTML += (`<span style='color: red;'><b>${name}</b></span>: `);
+    el.innerHTML += messageHTML;
+    messageLog.appendChild(el);
+    // messageLog.scrollTop = messageLog.scrollHeight - messageLog.clientHeight; // For static scrolling.
+
+    // For smooth scrolling
+    $('#message-log').animate({
+        scrollTop: messageLog.scrollHeight - messageLog.clientHeight
+    }, 100);
+}
+
 // (TODO): Implement screen-sharing.

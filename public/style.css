@@ -1,0 +1,75 @@
+[contenteditable] {
+    border: 2px solid #000;
+    line-height: 1.4em;
+    -webkit-appearance: textfield;
+    appearance: textfield
+}
+
+div.scroll {
+    margin: 4px, 4px;
+    padding: 6px;
+	border: 2px solid #000000;
+    background-color: rgb(25, 25, 25);
+    /* width: 345px; */
+    height: 450px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: justify;
+    max-height: 386px;
+}
+
+#main-input {
+	max-lines: 1;
+    width: 74%;
+}
+
+@media screen and (max-device-width: 480px) and (orientation: portrait) {
+    #emoji-menu {
+        margin: 4px, 4px;
+        padding: 6px;
+        border: 2px solid #000000;
+        background-color: rgb(25, 25, 25);
+        overflow-x: hidden;
+        overflow-y: auto;
+        text-align: justify;
+        position: fixed;
+        right: 0;
+        width: 200px;
+        height: 250px;
+        transform: translate(-5%, -115%);
+    } 
+}
+
+/* @media screen and (min-device-width: 768px) and (max-device-width: 1024px){ */
+@media screen and (min-device-width: 768px) {
+    #emoji-menu {
+        margin: 4px, 4px;
+        padding: 6px;
+        border: 2px solid #000000;
+        background-color: rgb(25, 25, 25);
+        overflow-x: hidden;
+        overflow-y: auto;
+        text-align: justify;
+        position: fixed;
+        right: 0;
+        width: 200px;
+        height: 250px;
+        transform: translate(-120%, -115%);
+    }
+}
+
+div.message {
+	background-color: rgb(25, 25, 25);
+	padding: 5px;
+}
+
+div.main-input {
+    padding: 3px;
+	border: 2px solid #000000;
+    background-color: rgb(25, 25, 25);
+    width: 380px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+	/* transform: translateY(7px); */
+}
