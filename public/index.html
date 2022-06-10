@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- For linking the SVG Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,700,1,0" />
+
     <title>WebRTC Audio Demo</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
@@ -70,7 +74,7 @@
     </style>
 </head>
 <body>
-    <h1 id="MainTitle">WebRTC Audio Demo</h1>
+    <h1 style="display: none;" id="MainTitle">WebRTC Audio Demo</h1>
 
     <div id="selectRoom" style="display: none;">
         <button id="goBoth">Video and Audio</button>
@@ -102,10 +106,14 @@
         </div>
 
         <br/>
-        <button id="mute" style="display: none; margin: auto; width: 100px; background-color: lime;">Mute</button>
-        <button id="turnOffVideo" style="margin: auto;">Turn Off Video</button>
-        <h2>Remote audio events</h2>
-        <div style="overflow-y: scroll; width: 90%;" id="audioEvents"></div>
+
+        <div id="controlBar">
+            <button class="material-symbols-outlined" id="mute">mic</button>
+            <button class="material-symbols-outlined" id="turnOffVideo" style="margin: auto;">videocam</button>
+        </div>
+
+        <h2 style="display: none;">Remote audio events</h2>
+        <div style="overflow-y: scroll; width: 90%; display: none;" id="audioEvents"></div>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

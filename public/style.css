@@ -23,6 +23,30 @@ div.scroll {
     width: 74%;
 }
 
+#controlBar {
+    background: #1b1b1b;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    left: 0;
+}
+
+#mute {
+    margin: auto;
+    border-radius: 100%;
+    padding: 15px;
+    font-size: 1.5rem;
+}
+
+#turnOffVideo {
+    margin: auto;
+    border-radius: 100%;
+    padding: 15px;
+    font-size: 1.5rem;
+}
+
 @media screen and (max-device-width: 480px) and (orientation: portrait) {
     #emoji-menu {
         margin: 4px, 4px;

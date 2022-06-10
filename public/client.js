@@ -6,6 +6,7 @@ var btnGoAudioOnly = document.getElementById("goAudioOnly");
 var localVideo = document.getElementById("localVideo");
 var remoteVideo = document.getElementById("remoteVideo");
 var btnMute = document.getElementById("mute");
+var btnTurnOffVideo = document.getElementById("turnOffVideo");
 var listAudioEvents = document.getElementById("audioEvents");
 
 // variables
@@ -149,7 +150,7 @@ function addLocalStream(stream) {
     localVideo.srcObject = stream
 
     if (stream.getAudioTracks().length > 0) {
-        btnMute.style = "display: block";
+        // btnMute.style = "display: block";
     }
 }
 
@@ -167,7 +168,8 @@ function toggleAudio() {
         room: roomNumber,
         message: localStream.getAudioTracks()[0].enabled ? "Remote user's audio is unmuted" : "Remote user's audio is muted"
     });
-    btnMute.innerText = localStream.getAudioTracks()[0].enabled ? "Mute" : "Unmute";
+    // btnMute.innerText = localStream.getAudioTracks()[0].enabled ? "Mute" : "Unmute";
+    btnMute.innerText = localStream.getAudioTracks()[0].enabled ? "mic" : "mic_off";
     // (TODO): Make the green box on the video element change its color depending on the mute/unmute status of the respective speaker.
 }
 
@@ -178,10 +180,22 @@ function toggleVideo(e) {
         room: roomNumber,
         message: localStream.getVideoTracks()[0].enabled ? "Remote user's video is on" : "Remote user's video is off"
     });
-    e.target.innerText = localStream.getVideoTracks()[0].enabled ? "Turn Off Video" : "Turn On Video";
+    // e.target.innerText = localStream.getVideoTracks()[0].enabled ? "Turn Off Video" : "Turn On Video";
+    btnTurnOffVideo.innerText = localStream.getVideoTracks()[0].enabled ? "videocam" : "videocam_off";
     // (TODO): Make the green box on the video element change its color depending on the mute/unmute status of the respective speaker.
 }
 document.getElementById("turnOffVideo").onclick = toggleVideo;
+document.addEventListener("keydown", (e) => {
+    if ((e.key == "V" || e.key == "M") && e.ctrlKey && e.shiftKey) {
+        e.preventDefault();
+        if (e.key == "V") {
+            toggleVideo();
+        }
+        else if (e.key == "M") {
+            toggleAudio();
+        }
+    }
+});
 
 function addAudioEvent(event) {
     var p = document.createElement("p");
