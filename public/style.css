@@ -119,3 +119,8 @@ div.main-input {
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+img {
+    max-width: 200px;
+    max-height: 200px;
+}
