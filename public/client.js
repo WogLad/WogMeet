@@ -294,3 +294,21 @@ function appendMessage(name, messageHTML, nameColor) {
 initiateCall(true);
 
 // (TODO): Implement screen-sharing.
+
+function createVideoElement(username, videoStreamObj) {
+    var v = document.createElement("video");
+    v.id = `video_${username}`;
+    v.srcObject = videoStreamObj;
+
+    var vParent = document.createElement("div");
+    vParent.setAttribute("style", "width: fit-content; position: relative; margin: 20px;");
+
+    var vMuteStatus = document.createElement("div");
+    vMuteStatus.className = "videoMuteStatus";
+
+    vParent.append(v);
+    vParent.append(vMuteStatus);
+
+    document.getElementById("videosListDiv").append(vParent);
+    return v.id;
+}
